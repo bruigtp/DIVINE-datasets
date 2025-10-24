@@ -1,0 +1,435 @@
+---
+title: "DIVINE-datasets"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 2
+number_sections: true
+vignette: >
+  %\VignetteIndexEntry{DIVINE-datasets}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{css, echo=FALSE}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th, td {
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #e9ecef;
+}
+th {
+  background-color: #f7f9fb;
+  font-weight: 600;
+}
+.caption {
+  caption-side: top;
+  text-align: left;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+blockquote.citation {
+  border-left: 4px solid #6c757d;
+  padding: 0.6rem 1rem;
+  background: #fbfbfb;
+  color: #333;
+  margin: 1rem 0;
+  border-radius: 4px;
+}
+.small-note {
+  font-size: 0.95em;
+  color: #555;
+}
+```
+
+---
+
+# Introduction
+
+The **DIVINE-datasets** provides a collection of curated, anonymized datasets derived from the DIVINE project.
+These datasets include various clinical domains—such as patient demographics, comorbidities, symptoms, laboratory findings, treatments, and outcomes—allowing users to explore and practice different data manipulation and analysis workflows in a realistic setting.
+
+---
+
+# Available Datasets
+
+This repository includes the following datasets:
+
+| Dataset                   | Description                                          |
+| ------------------------- | ---------------------------------------------------- |
+| `analytics`               | Laboratory parameters at hospital admission.         |
+| `comorbidities`           | Baseline comorbid conditions and functional indices. |
+| `complications`           | In-hospital complications during COVID-19.           |
+| `concomitant_medication`  | Chronic treatments before hospital admission.        |
+| `demographic`             | Baseline demographic and lifestyle data.             |
+| `end_followup`            | Outcomes and follow-up information.                  |
+| `icu`                     | ICU admissions and critical care interventions.      |
+| `inhosp_antibiotics`      | In-hospital antibiotic treatments.                   |
+| `inhosp_antivirals`       | In-hospital antiviral treatments.                    |
+| `inhosp_other_treatments` | Other in-hospital supportive therapies.              |
+| `scores`                  | Disease severity scores at admission.                |
+| `symptoms`                | Clinical symptoms at hospital admission.             |
+| `vital_signs`             | Vital parameters and oxygenation data.               |
+| `vaccine`                 | COVID-19 vaccination status.                         |
+
+---
+
+# Dataset Descriptions
+
+Each dataset is described below, including its dimensions and variable definitions.
+
+## analytics
+
+Laboratory data collected at hospital admission.
+
+Dimensions: 5813 rows × 9 columns
+
+| Variable                | Description                                             |
+| ----------------------- | ------------------------------------------------------- |
+| **record_id**           | Identifier of each record (anonymized).                 |
+| **covid_wave**          | COVID-19 wave (`Wave 1`, `Wave 2`, `Wave 3`, `Wave 5`). |
+| **center**              | Hospital of admission (`Hospital A–E`).                 |
+| **analytics_available** | Availability of laboratory results.                     |
+| **total_leukocytes**    | Total leukocytes (mil/mm³).                             |
+| **hemoglobin**          | Hemoglobin (g/dL).                                      |
+| **total_lymphocytes**   | Total lymphocytes (mil/mm³).                            |
+| **d_dimer**             | D-dimer (µg/L).                                         |
+| **c_reactive_protein**  | C-reactive protein (mg/L).                              |
+
+---
+
+## comorbidities
+
+Information on pre-existing conditions, functional status, and comorbidity indices at admission.
+
+Dimensions: 5813 rows × 37 columns
+
+| Variable                      | Description                                             |
+| ----------------------------- | ------------------------------------------------------- |
+| **record_id**                 | Identifier of each record.                              |
+| **covid_wave**                | COVID-19 wave (`Wave 1–5`).                             |
+| **center**                    | Hospital of admission.                                  |
+| **sociofunctional**           | Sociofunctional status.                                 |
+| **frailty**                   | Chronic condition classification (`No`, `PCC`, `MACA`). |
+| **barthel_score**             | Barthel functional index.                               |
+| **weight**                    | Weight (kg).                                            |
+| **height**                    | Height (cm).                                            |
+| **body_mass_index**           | Body mass index (kg/m²).                                |
+| **dm**                        | Diabetes mellitus type 2.                               |
+| **type_dm**                   | Type of diabetes mellitus.                              |
+| **chronic_lung_disease**      | Chronic lung disease.                                   |
+| **chronic_kidney_disease**    | Severe chronic kidney disease.                          |
+| **mild_kidney_disease**       | Mild chronic kidney disease.                            |
+| **renal_therapy**             | Receiving renal replacement therapy.                    |
+| **heart_disease**             | Heart failure.                                          |
+| **coronary_disease**          | Coronary heart disease.                                 |
+| **myocardial_infarction**     | Previous myocardial infarction.                         |
+| **hematologic_neo**           | Hematologic neoplasia.                                  |
+| **hematologic_neo_type**      | Type of hematologic neoplasia.                          |
+| **non_metastatic_neo**        | Non-metastatic neoplasia.                               |
+| **metastatic_neo**            | Metastatic neoplasia.                                   |
+| **stroke_tia**                | Stroke or transient ischemic attack.                    |
+| **peripheral_vasculopathy**   | Peripheral vascular disease.                            |
+| **dementia**                  | Dementia.                                               |
+| **mild_liver_disease**        | Mild liver disease.                                     |
+| **severe_liver_disease**      | Severe liver disease.                                   |
+| **connective_tissue_disease** | Connective tissue disease.                              |
+| **peptic_ulcer**              | Peptic ulcer disease.                                   |
+| **hemiplegia**                | Hemiplegia.                                             |
+| **hiv**                       | Human immunodeficiency virus infection.                 |
+| **charlson_index**            | Charlson comorbidity index.                             |
+| **hypertension**              | Hypertension.                                           |
+| **dyslipidemia**              | Dyslipidemia.                                           |
+| **depression**                | Depression.                                             |
+| **ceiling**                   | Therapeutic ceiling of care.                            |
+| **ceiling_dico**              | Dichotomized therapeutic ceiling of care.               |
+
+---
+
+## complications
+
+Complications experienced during hospitalization.
+
+Dimensions: 5809 rows × 9 columns
+
+| Variable                 | Description                              |
+| ------------------------ | ---------------------------------------- |
+| **record_id**            | Record identifier.                       |
+| **covid_wave**           | COVID-19 wave.                           |
+| **center**               | Hospital of admission.                   |
+| **comp**                 | Any complication during hospitalization. |
+| **kidney_failure**       | Kidney failure.                          |
+| **mental_status_change** | Altered mental status.                   |
+| **nosocomial_infection** | Nosocomial infection.                    |
+| **comp_cardiac**         | Cardiac complications.                   |
+| **comp_respiratory**     | Respiratory complications.               |
+
+
+---
+
+## concomitant_medication
+
+Medications taken before hospital admission.
+
+Dimensions: 5813 rows × 11 columns
+
+| Variable                | Description                                                           |
+| ----------------------- | --------------------------------------------------------------------- |
+| **record_id**           | Identifier of each record.                                            |
+| **covid_wave**          | COVID-19 wave (`Wave 1–5`).                                           |
+| **center**              | Hospital of admission.                                                |
+| **statins_pre**         | Previous treatment with statins.                                      |
+| **cortis_pre**          | Previous treatment with corticosteroids.                              |
+| **acei_pre**            | Previous treatment with ACE inhibitors.                               |
+| **ara2_pre**            | Previous treatment with angiotensin II receptor antagonists (ARA-II). |
+| **cortis_systemic_pre** | Routine use of systemic corticosteroids.                              |
+| **cortis_inhaled_pre**  | Routine use of inhaled corticosteroids.                               |
+| **anticoagulants_pre**  | Previous treatment with anticoagulants.                               |
+| **immunosuppre_pre**    | Previous treatment with immunosuppressants.                           |
+
+---
+
+## demographic
+
+Baseline demographic and lifestyle characteristics.
+
+Dimensions: 5813 rows × 8 columns
+
+| Variable             | Description                                        |
+| -------------------- | -------------------------------------------------- |
+| **record_id**        | Record identifier.                                 |
+| **covid_wave**       | COVID-19 wave (`Wave 1–5`).                        |
+| **center**           | Hospital of admission.                             |
+| **sex**              | Sex at birth.                                      |
+| **age**              | Age at hospital admission (years).                 |
+| **smoker**           | Smoking status (`No`, `Yes`, `Ex-smoker`).         |
+| **alcohol**          | Alcohol consumption (`No`, `Yes`).                 |
+| **residence_center** | Living in a long-term care facility (`No`, `Yes`). |
+
+
+---
+
+## end_followup
+
+Patient outcomes and end-of-follow-up information.
+
+Dimensions: 5813 rows × 8 columns
+
+| Variable                    | Description                                         |
+| --------------------------- | --------------------------------------------------- |
+| **record_id**               | Record identifier.                                  |
+| **covid_wave**              | COVID-19 wave (`Wave 1–5`).                         |
+| **center**                  | Hospital of admission.                              |
+| **clinical_stability_days** | Days from hospital admission to clinical stability. |
+| **exitus_days**             | Days from hospital admission to death.              |
+| **discharge_days**          | Days from hospital admission to discharge.          |
+| **discharge**               | Discharged from hospital (`Yes`, `No`).             |
+| **exitus**                  | Died during hospital admission (`Yes`, `No`).       |
+
+
+---
+
+## icu
+
+Information on ICU admissions and interventions during hospitalization.
+
+Dimensions: 5813 rows × 14 columns
+
+| Variable                       | Description                                                                   |
+| ------------------------------ | ----------------------------------------------------------------------------- |
+| **record_id**                  | Record identifier.                                                            |
+| **covid_wave**                 | COVID-19 wave (`Wave 1–5`).                                                   |
+| **center**                     | Hospital of admission.                                                        |
+| **icu**                        | Admitted to the ICU (`Yes`, `No`).                                            |
+| **icu_enter_days**             | Days from hospital admission to ICU admission.                                |
+| **icu_exit_days**              | Days from hospital admission to ICU discharge.                                |
+| **vent_mec**                   | Received invasive mechanical ventilation (`Yes`, `No`).                       |
+| **vent_mec_start_days**        | Days from hospital admission to start of invasive mechanical ventilation.     |
+| **vent_mec_end_days**          | Days from hospital admission to end of invasive mechanical ventilation.       |
+| **vent_mec_no_inv**            | Received non-invasive mechanical ventilation (`Yes`, `No`).                   |
+| **vent_mec_no_inv_start_days** | Days from hospital admission to start of non-invasive mechanical ventilation. |
+| **vent_mec_no_inv_end_days**   | Days from hospital admission to end of non-invasive mechanical ventilation.   |
+
+
+---
+
+## inhosp_antibiotics
+
+In-hospital antibiotic treatments administered during COVID-19 hospitalization.
+
+Dimensions: 5809 rows × 17 columns
+
+| Variable                        | Description                                   |
+| ------------------------------- | --------------------------------------------- |
+| **record_id**                   | Record identifier.                            |
+| **covid_wave**                  | COVID-19 wave (`Wave 1–5`).                   |
+| **center**                      | Hospital of admission.                        |
+| **any_antibiotic**              | Received any antibiotic during hospital stay. |
+| **amoxicillin**                 | Treatment with amoxicillin.                   |
+| **amoxicillin_clavulanic_acid** | Treatment with amoxicillin/clavulanic acid.   |
+| **azithromycin**                | Treatment with azithromycin.                  |
+| **ceftriaxone**                 | Treatment with ceftriaxone.                   |
+| **ciprofloxacin**               | Treatment with ciprofloxacin.                 |
+| **cotrimoxazole**               | Treatment with cotrimoxazole.                 |
+| **levofloxacin**                | Treatment with levofloxacin.                  |
+| **linezolid**                   | Treatment with linezolid.                     |
+| **meropenem**                   | Treatment with meropenem.                     |
+| **piperacillin**                | Treatment with piperacillin.                  |
+| **piperacillin_tazobactam**     | Treatment with piperacillin/tazobactam.       |
+| **teicoplanin**                 | Treatment with teicoplanin.                   |
+| **other_antibiotic**            | Treatment with another antibiotic.            |
+
+
+---
+
+## inhosp_antivirals
+
+Antiviral treatments received during hospitalization.
+
+Dimensions: 5809 rows × 10 columns
+
+| Variable                        | Description                    |
+| ------------------------------- | ------------------------------ |
+| **record_id**                   | Record identifier.             |
+| **covid_wave**                  | COVID-19 wave.                 |
+| **center**                      | Hospital of admission.         |
+| **any_antiviral**               | Any antiviral treatment.       |
+| **hydroxychloroquine**          | Hydroxychloroquine.            |
+| **interferon_b**                | Interferon beta.               |
+| **kaletra_ritonavir_lopinavir** | Kaletra (ritonavir-lopinavir). |
+| **remdesivir**                  | Remdesivir.                    |
+| **tocilizumab**                 | Tocilizumab.                   |
+| **other_antiviral**             | Other antiviral therapy.       |
+
+
+---
+
+## inhosp_other_treatments
+
+Other in-hospital supportive or pharmacologic treatments.
+
+Dimensions: 5809 rows × 6 columns
+
+| Variable                | Description                              |
+| ----------------------- | ---------------------------------------- |
+| **record_id**           | Record identifier.                       |
+| **covid_wave**          | COVID-19 wave.                           |
+| **center**              | Hospital of admission.                   |
+| **corticosteroids**     | Corticosteroid treatment.                |
+| **lmwh**                | Low-molecular-weight heparin (LMWH) use. |
+| **oral_anticoagulants** | Oral anticoagulant therapy.              |
+
+---
+
+## scores
+
+Disease severity and prognostic indices recorded at admission.
+
+Dimensions: 5813 rows × 10 columns
+
+| Variable          | Description                               |
+| ----------------- | ----------------------------------------- |
+| **record_id**     | Record identifier.                        |
+| **covid_wave**    | COVID-19 wave.                            |
+| **center**        | Hospital of admission.                    |
+| **psi**           | Pneumonia Severity Index.                 |
+| **group_psi**     | PSI severity group (`1–4`).               |
+| **curb65**        | CURB-65 score.                            |
+| **group_curb65**  | CURB-65 group (`1–3`).                    |
+| **mulbsta**       | MULBSTA score.                            |
+| **group_mulbsta** | MULBSTA risk group (`Low`, `High`).       |
+| **rox_index**     | ROX index (SpO₂/FiO₂ / respiratory rate). |
+
+
+
+---
+
+## symptoms
+
+COVID-19–related symptoms reported at admission.
+
+Dimensions: 5813 rows × 24 columns
+
+| Variable                 | Description                                 |
+| ------------------------ | ------------------------------------------- |
+| **record_id**            | Record identifier.                          |
+| **covid_wave**           | COVID-19 wave.                              |
+| **center**               | Hospital of admission.                      |
+| **symptoms_days**        | Days from symptom onset to hospitalization. |
+| **rhinorrhea**           | Rhinorrhea (nasal discharge).               |
+| **anosmia**              | Anosmia (loss of smell).                    |
+| **ageusia**              | Ageusia (loss of taste).                    |
+| **arthromyalgia**        | Arthromyalgia (joint/muscle pain).          |
+| **odynophagia**          | Odynophagia (painful swallowing).           |
+| **fever**                | Fever.                                      |
+| **cough**                | Cough.                                      |
+| **dyspnea**              | Dyspnea (shortness of breath).              |
+| **expectoration**        | Expectoration.                              |
+| **diarrhea**             | Diarrhea.                                   |
+| **vomit**                | Vomiting.                                   |
+| **nausea**               | Nausea.                                     |
+| **asthenia**             | Asthenia (weakness).                        |
+| **anorexia**             | Anorexia (loss of appetite).                |
+| **cephal**               | Headache.                                   |
+| **chest_pain**           | Chest pain.                                 |
+| **abdominal_pain**       | Abdominal pain.                             |
+| **confusional_syndrome** | Confusional syndrome.                       |
+| **shock_admission**      | Shock on admission.                         |
+| **bacterial_infection**  | Bacterial co-infection.                     |
+
+---
+
+## vital_signs
+
+Vital parameters, oxygen therapy, and chest imaging at admission.
+
+Dimensions: 5813 rows × 13 columns
+
+| Variable              | Description                      |
+| --------------------- | -------------------------------- |
+| **record_id**         | Record identifier.               |
+| **covid_wave**        | COVID-19 wave.                   |
+| **center**            | Hospital of admission.           |
+| **temperature**       | Temperature (°C).                |
+| **fio2_contributed**  | Inspired oxygen fraction (%).    |
+| **syst_blood_press**  | Systolic blood pressure (mmHg).  |
+| **diast_blood_press** | Diastolic blood pressure (mmHg). |
+| **saturation**        | Oxygen saturation (%).           |
+| **cardiac_freq**      | Heart rate (bpm).                |
+| **supporto2**         | Oxygen support administered.     |
+| **normal_radio**      | Normal chest radiograph.         |
+| **pleural_effusion**  | Pleural effusion present.        |
+| **saturation_fio2**   | SpO₂/FiO₂ ratio.                 |
+
+---
+
+## vaccine
+
+COVID-19 vaccination status at admission.
+
+Dimensions: 5813 rows × 6 columns
+
+| Variable             | Description                                               |
+| -------------------- | --------------------------------------------------------- |
+| **record_id**        | Record identifier.                                        |
+| **covid_wave**       | COVID-19 wave.                                            |
+| **center**           | Hospital of admission.                                    |
+| **vaccine**          | Vaccinated (`Yes`/`No`).                                  |
+| **complete_vaccine** | Vaccination completeness (`None`, `Partial`, `Complete`). |
+| **immune_vaccine**   | Vaccine-induced immunity (`None`, `Partial`, `Total`).    |
+
+
+---
+
+# Citation
+
+If you use these datasets in your research or teaching, please cite the original study:
+
+> Pallarès N., Tebé C., Abelenda-Alonso G., Rombauts A., Oriol I., Simonetti A. F., Rodríguez-Molinero A., Izquierdo E., Díaz-Brito V., Molist G., Gómez Melis G., Carratalà J., Videla S., & MetroSud and DIVINE study groups (2023). *Characteristics and Outcomes by Ceiling of Care of Subjects Hospitalized with COVID-19 During Four Waves of the Pandemic in a Metropolitan Area: A Multicenter Cohort Study.* Infectious Diseases and Therapy, 12(1), 273–289. DOI: 10.1007/s40121-022-00705-w
+
+<div class="small-note">Last updated: 2025-10-24</div>
+

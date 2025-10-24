@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>DIVINE-datasets</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">DIVINE-datasets</h1>
+
+
+<div id="TOC">
+<ul>
+<li><a href="#introduction" id="toc-introduction">Introduction</a></li>
+<li><a href="#available-datasets" id="toc-available-datasets">Available
+Datasets</a></li>
+<li><a href="#dataset-descriptions" id="toc-dataset-descriptions">Dataset Descriptions</a>
+<ul>
+<li><a href="#analytics" id="toc-analytics">analytics</a></li>
+<li><a href="#comorbidities" id="toc-comorbidities">comorbidities</a></li>
+<li><a href="#complications" id="toc-complications">complications</a></li>
+<li><a href="#concomitant_medication" id="toc-concomitant_medication">concomitant_medication</a></li>
+<li><a href="#demographic" id="toc-demographic">demographic</a></li>
+<li><a href="#end_followup" id="toc-end_followup">end_followup</a></li>
+<li><a href="#icu" id="toc-icu">icu</a></li>
+<li><a href="#inhosp_antibiotics" id="toc-inhosp_antibiotics">inhosp_antibiotics</a></li>
+<li><a href="#inhosp_antivirals" id="toc-inhosp_antivirals">inhosp_antivirals</a></li>
+<li><a href="#inhosp_other_treatments" id="toc-inhosp_other_treatments">inhosp_other_treatments</a></li>
+<li><a href="#scores" id="toc-scores">scores</a></li>
+<li><a href="#symptoms" id="toc-symptoms">symptoms</a></li>
+<li><a href="#vital_signs" id="toc-vital_signs">vital_signs</a></li>
+<li><a href="#vaccine" id="toc-vaccine">vaccine</a></li>
+</ul></li>
+<li><a href="#citation" id="toc-citation">Citation</a></li>
+</ul>
+</div>
+
+<style type="text/css">
+table {
+border-collapse: collapse;
+width: 100%;
+}
+th, td {
+padding: 0.45rem 0.6rem;
+text-align: left;
+vertical-align: top;
+border-bottom: 1px solid #e9ecef;
+}
+th {
+background-color: #f7f9fb;
+font-weight: 600;
+}
+.caption {
+caption-side: top;
+text-align: left;
+font-style: italic;
+margin-bottom: 0.5rem;
+}
+blockquote.citation {
+border-left: 4px solid #6c757d;
+padding: 0.6rem 1rem;
+background: #fbfbfb;
+color: #333;
+margin: 1rem 0;
+border-radius: 4px;
+}
+.small-note {
+font-size: 0.95em;
+color: #555;
+}
+</style>
+<hr />
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The <strong>DIVINE-datasets</strong> provides a collection of
+curated, anonymized datasets derived from the DIVINE project. These
+datasets include various clinical domains—such as patient demographics,
+comorbidities, symptoms, laboratory findings, treatments, and
+outcomes—allowing users to explore and practice different data
+manipulation and analysis workflows in a realistic setting.</p>
+<hr />
+</div>
+<div id="available-datasets" class="section level1">
+<h1>Available Datasets</h1>
+<p>This repository includes the following datasets:</p>
+<table>
+<colgroup>
+<col width="32%" />
+<col width="67%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>analytics</code></td>
+<td>Laboratory parameters at hospital admission.</td>
+</tr>
+<tr class="even">
+<td><code>comorbidities</code></td>
+<td>Baseline comorbid conditions and functional indices.</td>
+</tr>
+<tr class="odd">
+<td><code>complications</code></td>
+<td>In-hospital complications during COVID-19.</td>
+</tr>
+<tr class="even">
+<td><code>concomitant_medication</code></td>
+<td>Chronic treatments before hospital admission.</td>
+</tr>
+<tr class="odd">
+<td><code>demographic</code></td>
+<td>Baseline demographic and lifestyle data.</td>
+</tr>
+<tr class="even">
+<td><code>end_followup</code></td>
+<td>Outcomes and follow-up information.</td>
+</tr>
+<tr class="odd">
+<td><code>icu</code></td>
+<td>ICU admissions and critical care interventions.</td>
+</tr>
+<tr class="even">
+<td><code>inhosp_antibiotics</code></td>
+<td>In-hospital antibiotic treatments.</td>
+</tr>
+<tr class="odd">
+<td><code>inhosp_antivirals</code></td>
+<td>In-hospital antiviral treatments.</td>
+</tr>
+<tr class="even">
+<td><code>inhosp_other_treatments</code></td>
+<td>Other in-hospital supportive therapies.</td>
+</tr>
+<tr class="odd">
+<td><code>scores</code></td>
+<td>Disease severity scores at admission.</td>
+</tr>
+<tr class="even">
+<td><code>symptoms</code></td>
+<td>Clinical symptoms at hospital admission.</td>
+</tr>
+<tr class="odd">
+<td><code>vital_signs</code></td>
+<td>Vital parameters and oxygenation data.</td>
+</tr>
+<tr class="even">
+<td><code>vaccine</code></td>
+<td>COVID-19 vaccination status.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="dataset-descriptions" class="section level1">
+<h1>Dataset Descriptions</h1>
+<p>Each dataset is described below, including its dimensions and
+variable definitions.</p>
+<div id="analytics" class="section level2">
+<h2>analytics</h2>
+<p>Laboratory data collected at hospital admission.</p>
+<p>Dimensions: 5813 rows × 9 columns</p>
+<table>
+<colgroup>
+<col width="29%" />
+<col width="70%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Identifier of each record (anonymized).</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave (<code>Wave 1</code>, <code>Wave 2</code>,
+<code>Wave 3</code>, <code>Wave 5</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission (<code>Hospital A–E</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>analytics_available</strong></td>
+<td>Availability of laboratory results.</td>
+</tr>
+<tr class="odd">
+<td><strong>total_leukocytes</strong></td>
+<td>Total leukocytes (mil/mm³).</td>
+</tr>
+<tr class="even">
+<td><strong>hemoglobin</strong></td>
+<td>Hemoglobin (g/dL).</td>
+</tr>
+<tr class="odd">
+<td><strong>total_lymphocytes</strong></td>
+<td>Total lymphocytes (mil/mm³).</td>
+</tr>
+<tr class="even">
+<td><strong>d_dimer</strong></td>
+<td>D-dimer (µg/L).</td>
+</tr>
+<tr class="odd">
+<td><strong>c_reactive_protein</strong></td>
+<td>C-reactive protein (mg/L).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="comorbidities" class="section level2">
+<h2>comorbidities</h2>
+<p>Information on pre-existing conditions, functional status, and
+comorbidity indices at admission.</p>
+<p>Dimensions: 5813 rows × 37 columns</p>
+<table>
+<colgroup>
+<col width="34%" />
+<col width="65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Identifier of each record.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave (<code>Wave 1–5</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>sociofunctional</strong></td>
+<td>Sociofunctional status.</td>
+</tr>
+<tr class="odd">
+<td><strong>frailty</strong></td>
+<td>Chronic condition classification (<code>No</code>, <code>PCC</code>,
+<code>MACA</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>barthel_score</strong></td>
+<td>Barthel functional index.</td>
+</tr>
+<tr class="odd">
+<td><strong>weight</strong></td>
+<td>Weight (kg).</td>
+</tr>
+<tr class="even">
+<td><strong>height</strong></td>
+<td>Height (cm).</td>
+</tr>
+<tr class="odd">
+<td><strong>body_mass_index</strong></td>
+<td>Body mass index (kg/m²).</td>
+</tr>
+<tr class="even">
+<td><strong>dm</strong></td>
+<td>Diabetes mellitus type 2.</td>
+</tr>
+<tr class="odd">
+<td><strong>type_dm</strong></td>
+<td>Type of diabetes mellitus.</td>
+</tr>
+<tr class="even">
+<td><strong>chronic_lung_disease</strong></td>
+<td>Chronic lung disease.</td>
+</tr>
+<tr class="odd">
+<td><strong>chronic_kidney_disease</strong></td>
+<td>Severe chronic kidney disease.</td>
+</tr>
+<tr class="even">
+<td><strong>mild_kidney_disease</strong></td>
+<td>Mild chronic kidney disease.</td>
+</tr>
+<tr class="odd">
+<td><strong>renal_therapy</strong></td>
+<td>Receiving renal replacement therapy.</td>
+</tr>
+<tr class="even">
+<td><strong>heart_disease</strong></td>
+<td>Heart failure.</td>
+</tr>
+<tr class="odd">
+<td><strong>coronary_disease</strong></td>
+<td>Coronary heart disease.</td>
+</tr>
+<tr class="even">
+<td><strong>myocardial_infarction</strong></td>
+<td>Previous myocardial infarction.</td>
+</tr>
+<tr class="odd">
+<td><strong>hematologic_neo</strong></td>
+<td>Hematologic neoplasia.</td>
+</tr>
+<tr class="even">
+<td><strong>hematologic_neo_type</strong></td>
+<td>Type of hematologic neoplasia.</td>
+</tr>
+<tr class="odd">
+<td><strong>non_metastatic_neo</strong></td>
+<td>Non-metastatic neoplasia.</td>
+</tr>
+<tr class="even">
+<td><strong>metastatic_neo</strong></td>
+<td>Metastatic neoplasia.</td>
+</tr>
+<tr class="odd">
+<td><strong>stroke_tia</strong></td>
+<td>Stroke or transient ischemic attack.</td>
+</tr>
+<tr class="even">
+<td><strong>peripheral_vasculopathy</strong></td>
+<td>Peripheral vascular disease.</td>
+</tr>
+<tr class="odd">
+<td><strong>dementia</strong></td>
+<td>Dementia.</td>
+</tr>
+<tr class="even">
+<td><strong>mild_liver_disease</strong></td>
+<td>Mild liver disease.</td>
+</tr>
+<tr class="odd">
+<td><strong>severe_liver_disease</strong></td>
+<td>Severe liver disease.</td>
+</tr>
+<tr class="even">
+<td><strong>connective_tissue_disease</strong></td>
+<td>Connective tissue disease.</td>
+</tr>
+<tr class="odd">
+<td><strong>peptic_ulcer</strong></td>
+<td>Peptic ulcer disease.</td>
+</tr>
+<tr class="even">
+<td><strong>hemiplegia</strong></td>
+<td>Hemiplegia.</td>
+</tr>
+<tr class="odd">
+<td><strong>hiv</strong></td>
+<td>Human immunodeficiency virus infection.</td>
+</tr>
+<tr class="even">
+<td><strong>charlson_index</strong></td>
+<td>Charlson comorbidity index.</td>
+</tr>
+<tr class="odd">
+<td><strong>hypertension</strong></td>
+<td>Hypertension.</td>
+</tr>
+<tr class="even">
+<td><strong>dyslipidemia</strong></td>
+<td>Dyslipidemia.</td>
+</tr>
+<tr class="odd">
+<td><strong>depression</strong></td>
+<td>Depression.</td>
+</tr>
+<tr class="even">
+<td><strong>ceiling</strong></td>
+<td>Therapeutic ceiling of care.</td>
+</tr>
+<tr class="odd">
+<td><strong>ceiling_dico</strong></td>
+<td>Dichotomized therapeutic ceiling of care.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="complications" class="section level2">
+<h2>complications</h2>
+<p>Complications experienced during hospitalization.</p>
+<p>Dimensions: 5809 rows × 9 columns</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Record identifier.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave.</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>comp</strong></td>
+<td>Any complication during hospitalization.</td>
+</tr>
+<tr class="odd">
+<td><strong>kidney_failure</strong></td>
+<td>Kidney failure.</td>
+</tr>
+<tr class="even">
+<td><strong>mental_status_change</strong></td>
+<td>Altered mental status.</td>
+</tr>
+<tr class="odd">
+<td><strong>nosocomial_infection</strong></td>
+<td>Nosocomial infection.</td>
+</tr>
+<tr class="even">
+<td><strong>comp_cardiac</strong></td>
+<td>Cardiac complications.</td>
+</tr>
+<tr class="odd">
+<td><strong>comp_respiratory</strong></td>
+<td>Respiratory complications.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="concomitant_medication" class="section level2">
+<h2>concomitant_medication</h2>
+<p>Medications taken before hospital admission.</p>
+<p>Dimensions: 5813 rows × 11 columns</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Identifier of each record.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave (<code>Wave 1–5</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>statins_pre</strong></td>
+<td>Previous treatment with statins.</td>
+</tr>
+<tr class="odd">
+<td><strong>cortis_pre</strong></td>
+<td>Previous treatment with corticosteroids.</td>
+</tr>
+<tr class="even">
+<td><strong>acei_pre</strong></td>
+<td>Previous treatment with ACE inhibitors.</td>
+</tr>
+<tr class="odd">
+<td><strong>ara2_pre</strong></td>
+<td>Previous treatment with angiotensin II receptor antagonists
+(ARA-II).</td>
+</tr>
+<tr class="even">
+<td><strong>cortis_systemic_pre</strong></td>
+<td>Routine use of systemic corticosteroids.</td>
+</tr>
+<tr class="odd">
+<td><strong>cortis_inhaled_pre</strong></td>
+<td>Routine use of inhaled corticosteroids.</td>
+</tr>
+<tr class="even">
+<td><strong>anticoagulants_pre</strong></td>
+<td>Previous treatment with anticoagulants.</td>
+</tr>
+<tr class="odd">
+<td><strong>immunosuppre_pre</strong></td>
+<td>Previous treatment with immunosuppressants.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="demographic" class="section level2">
+<h2>demographic</h2>
+<p>Baseline demographic and lifestyle characteristics.</p>
+<p>Dimensions: 5813 rows × 8 columns</p>
+<table>
+<colgroup>
+<col width="28%" />
+<col width="71%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Record identifier.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave (<code>Wave 1–5</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>sex</strong></td>
+<td>Sex at birth.</td>
+</tr>
+<tr class="odd">
+<td><strong>age</strong></td>
+<td>Age at hospital admission (years).</td>
+</tr>
+<tr class="even">
+<td><strong>smoker</strong></td>
+<td>Smoking status (<code>No</code>, <code>Yes</code>,
+<code>Ex-smoker</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>alcohol</strong></td>
+<td>Alcohol consumption (<code>No</code>, <code>Yes</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>residence_center</strong></td>
+<td>Living in a long-term care facility (<code>No</code>,
+<code>Yes</code>).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="end_followup" class="section level2">
+<h2>end_followup</h2>
+<p>Patient outcomes and end-of-follow-up information.</p>
+<p>Dimensions: 5813 rows × 8 columns</p>
+<table>
+<colgroup>
+<col width="34%" />
+<col width="65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Record identifier.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave (<code>Wave 1–5</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>clinical_stability_days</strong></td>
+<td>Days from hospital admission to clinical stability.</td>
+</tr>
+<tr class="odd">
+<td><strong>exitus_days</strong></td>
+<td>Days from hospital admission to death.</td>
+</tr>
+<tr class="even">
+<td><strong>discharge_days</strong></td>
+<td>Days from hospital admission to discharge.</td>
+</tr>
+<tr class="odd">
+<td><strong>discharge</strong></td>
+<td>Discharged from hospital (<code>Yes</code>, <code>No</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>exitus</strong></td>
+<td>Died during hospital admission (<code>Yes</code>,
+<code>No</code>).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="icu" class="section level2">
+<h2>icu</h2>
+<p>Information on ICU admissions and interventions during
+hospitalization.</p>
+<p>Dimensions: 5813 rows × 14 columns</p>
+<table>
+<colgroup>
+<col width="28%" />
+<col width="71%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Record identifier.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave (<code>Wave 1–5</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>icu</strong></td>
+<td>Admitted to the ICU (<code>Yes</code>, <code>No</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>icu_enter_days</strong></td>
+<td>Days from hospital admission to ICU admission.</td>
+</tr>
+<tr class="even">
+<td><strong>icu_exit_days</strong></td>
+<td>Days from hospital admission to ICU discharge.</td>
+</tr>
+<tr class="odd">
+<td><strong>vent_mec</strong></td>
+<td>Received invasive mechanical ventilation (<code>Yes</code>,
+<code>No</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>vent_mec_start_days</strong></td>
+<td>Days from hospital admission to start of invasive mechanical
+ventilation.</td>
+</tr>
+<tr class="odd">
+<td><strong>vent_mec_end_days</strong></td>
+<td>Days from hospital admission to end of invasive mechanical
+ventilation.</td>
+</tr>
+<tr class="even">
+<td><strong>vent_mec_no_inv</strong></td>
+<td>Received non-invasive mechanical ventilation (<code>Yes</code>,
+<code>No</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>vent_mec_no_inv_start_days</strong></td>
+<td>Days from hospital admission to start of non-invasive mechanical
+ventilation.</td>
+</tr>
+<tr class="even">
+<td><strong>vent_mec_no_inv_end_days</strong></td>
+<td>Days from hospital admission to end of non-invasive mechanical
+ventilation.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="inhosp_antibiotics" class="section level2">
+<h2>inhosp_antibiotics</h2>
+<p>In-hospital antibiotic treatments administered during COVID-19
+hospitalization.</p>
+<p>Dimensions: 5809 rows × 17 columns</p>
+<table>
+<colgroup>
+<col width="40%" />
+<col width="59%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Record identifier.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave (<code>Wave 1–5</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>any_antibiotic</strong></td>
+<td>Received any antibiotic during hospital stay.</td>
+</tr>
+<tr class="odd">
+<td><strong>amoxicillin</strong></td>
+<td>Treatment with amoxicillin.</td>
+</tr>
+<tr class="even">
+<td><strong>amoxicillin_clavulanic_acid</strong></td>
+<td>Treatment with amoxicillin/clavulanic acid.</td>
+</tr>
+<tr class="odd">
+<td><strong>azithromycin</strong></td>
+<td>Treatment with azithromycin.</td>
+</tr>
+<tr class="even">
+<td><strong>ceftriaxone</strong></td>
+<td>Treatment with ceftriaxone.</td>
+</tr>
+<tr class="odd">
+<td><strong>ciprofloxacin</strong></td>
+<td>Treatment with ciprofloxacin.</td>
+</tr>
+<tr class="even">
+<td><strong>cotrimoxazole</strong></td>
+<td>Treatment with cotrimoxazole.</td>
+</tr>
+<tr class="odd">
+<td><strong>levofloxacin</strong></td>
+<td>Treatment with levofloxacin.</td>
+</tr>
+<tr class="even">
+<td><strong>linezolid</strong></td>
+<td>Treatment with linezolid.</td>
+</tr>
+<tr class="odd">
+<td><strong>meropenem</strong></td>
+<td>Treatment with meropenem.</td>
+</tr>
+<tr class="even">
+<td><strong>piperacillin</strong></td>
+<td>Treatment with piperacillin.</td>
+</tr>
+<tr class="odd">
+<td><strong>piperacillin_tazobactam</strong></td>
+<td>Treatment with piperacillin/tazobactam.</td>
+</tr>
+<tr class="even">
+<td><strong>teicoplanin</strong></td>
+<td>Treatment with teicoplanin.</td>
+</tr>
+<tr class="odd">
+<td><strong>other_antibiotic</strong></td>
+<td>Treatment with another antibiotic.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="inhosp_antivirals" class="section level2">
+<h2>inhosp_antivirals</h2>
+<p>Antiviral treatments received during hospitalization.</p>
+<p>Dimensions: 5809 rows × 10 columns</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Record identifier.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave.</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>any_antiviral</strong></td>
+<td>Any antiviral treatment.</td>
+</tr>
+<tr class="odd">
+<td><strong>hydroxychloroquine</strong></td>
+<td>Hydroxychloroquine.</td>
+</tr>
+<tr class="even">
+<td><strong>interferon_b</strong></td>
+<td>Interferon beta.</td>
+</tr>
+<tr class="odd">
+<td><strong>kaletra_ritonavir_lopinavir</strong></td>
+<td>Kaletra (ritonavir-lopinavir).</td>
+</tr>
+<tr class="even">
+<td><strong>remdesivir</strong></td>
+<td>Remdesivir.</td>
+</tr>
+<tr class="odd">
+<td><strong>tocilizumab</strong></td>
+<td>Tocilizumab.</td>
+</tr>
+<tr class="even">
+<td><strong>other_antiviral</strong></td>
+<td>Other antiviral therapy.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="inhosp_other_treatments" class="section level2">
+<h2>inhosp_other_treatments</h2>
+<p>Other in-hospital supportive or pharmacologic treatments.</p>
+<p>Dimensions: 5809 rows × 6 columns</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Record identifier.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave.</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>corticosteroids</strong></td>
+<td>Corticosteroid treatment.</td>
+</tr>
+<tr class="odd">
+<td><strong>lmwh</strong></td>
+<td>Low-molecular-weight heparin (LMWH) use.</td>
+</tr>
+<tr class="even">
+<td><strong>oral_anticoagulants</strong></td>
+<td>Oral anticoagulant therapy.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="scores" class="section level2">
+<h2>scores</h2>
+<p>Disease severity and prognostic indices recorded at admission.</p>
+<p>Dimensions: 5813 rows × 10 columns</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Record identifier.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave.</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>psi</strong></td>
+<td>Pneumonia Severity Index.</td>
+</tr>
+<tr class="odd">
+<td><strong>group_psi</strong></td>
+<td>PSI severity group (<code>1–4</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>curb65</strong></td>
+<td>CURB-65 score.</td>
+</tr>
+<tr class="odd">
+<td><strong>group_curb65</strong></td>
+<td>CURB-65 group (<code>1–3</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>mulbsta</strong></td>
+<td>MULBSTA score.</td>
+</tr>
+<tr class="odd">
+<td><strong>group_mulbsta</strong></td>
+<td>MULBSTA risk group (<code>Low</code>, <code>High</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>rox_index</strong></td>
+<td>ROX index (SpO₂/FiO₂ / respiratory rate).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="symptoms" class="section level2">
+<h2>symptoms</h2>
+<p>COVID-19–related symptoms reported at admission.</p>
+<p>Dimensions: 5813 rows × 24 columns</p>
+<table>
+<colgroup>
+<col width="35%" />
+<col width="64%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Record identifier.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave.</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>symptoms_days</strong></td>
+<td>Days from symptom onset to hospitalization.</td>
+</tr>
+<tr class="odd">
+<td><strong>rhinorrhea</strong></td>
+<td>Rhinorrhea (nasal discharge).</td>
+</tr>
+<tr class="even">
+<td><strong>anosmia</strong></td>
+<td>Anosmia (loss of smell).</td>
+</tr>
+<tr class="odd">
+<td><strong>ageusia</strong></td>
+<td>Ageusia (loss of taste).</td>
+</tr>
+<tr class="even">
+<td><strong>arthromyalgia</strong></td>
+<td>Arthromyalgia (joint/muscle pain).</td>
+</tr>
+<tr class="odd">
+<td><strong>odynophagia</strong></td>
+<td>Odynophagia (painful swallowing).</td>
+</tr>
+<tr class="even">
+<td><strong>fever</strong></td>
+<td>Fever.</td>
+</tr>
+<tr class="odd">
+<td><strong>cough</strong></td>
+<td>Cough.</td>
+</tr>
+<tr class="even">
+<td><strong>dyspnea</strong></td>
+<td>Dyspnea (shortness of breath).</td>
+</tr>
+<tr class="odd">
+<td><strong>expectoration</strong></td>
+<td>Expectoration.</td>
+</tr>
+<tr class="even">
+<td><strong>diarrhea</strong></td>
+<td>Diarrhea.</td>
+</tr>
+<tr class="odd">
+<td><strong>vomit</strong></td>
+<td>Vomiting.</td>
+</tr>
+<tr class="even">
+<td><strong>nausea</strong></td>
+<td>Nausea.</td>
+</tr>
+<tr class="odd">
+<td><strong>asthenia</strong></td>
+<td>Asthenia (weakness).</td>
+</tr>
+<tr class="even">
+<td><strong>anorexia</strong></td>
+<td>Anorexia (loss of appetite).</td>
+</tr>
+<tr class="odd">
+<td><strong>cephal</strong></td>
+<td>Headache.</td>
+</tr>
+<tr class="even">
+<td><strong>chest_pain</strong></td>
+<td>Chest pain.</td>
+</tr>
+<tr class="odd">
+<td><strong>abdominal_pain</strong></td>
+<td>Abdominal pain.</td>
+</tr>
+<tr class="even">
+<td><strong>confusional_syndrome</strong></td>
+<td>Confusional syndrome.</td>
+</tr>
+<tr class="odd">
+<td><strong>shock_admission</strong></td>
+<td>Shock on admission.</td>
+</tr>
+<tr class="even">
+<td><strong>bacterial_infection</strong></td>
+<td>Bacterial co-infection.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="vital_signs" class="section level2">
+<h2>vital_signs</h2>
+<p>Vital parameters, oxygen therapy, and chest imaging at admission.</p>
+<p>Dimensions: 5813 rows × 13 columns</p>
+<table>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Record identifier.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave.</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>temperature</strong></td>
+<td>Temperature (°C).</td>
+</tr>
+<tr class="odd">
+<td><strong>fio2_contributed</strong></td>
+<td>Inspired oxygen fraction (%).</td>
+</tr>
+<tr class="even">
+<td><strong>syst_blood_press</strong></td>
+<td>Systolic blood pressure (mmHg).</td>
+</tr>
+<tr class="odd">
+<td><strong>diast_blood_press</strong></td>
+<td>Diastolic blood pressure (mmHg).</td>
+</tr>
+<tr class="even">
+<td><strong>saturation</strong></td>
+<td>Oxygen saturation (%).</td>
+</tr>
+<tr class="odd">
+<td><strong>cardiac_freq</strong></td>
+<td>Heart rate (bpm).</td>
+</tr>
+<tr class="even">
+<td><strong>supporto2</strong></td>
+<td>Oxygen support administered.</td>
+</tr>
+<tr class="odd">
+<td><strong>normal_radio</strong></td>
+<td>Normal chest radiograph.</td>
+</tr>
+<tr class="even">
+<td><strong>pleural_effusion</strong></td>
+<td>Pleural effusion present.</td>
+</tr>
+<tr class="odd">
+<td><strong>saturation_fio2</strong></td>
+<td>SpO₂/FiO₂ ratio.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+<div id="vaccine" class="section level2">
+<h2>vaccine</h2>
+<p>COVID-19 vaccination status at admission.</p>
+<p>Dimensions: 5813 rows × 6 columns</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="74%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>record_id</strong></td>
+<td>Record identifier.</td>
+</tr>
+<tr class="even">
+<td><strong>covid_wave</strong></td>
+<td>COVID-19 wave.</td>
+</tr>
+<tr class="odd">
+<td><strong>center</strong></td>
+<td>Hospital of admission.</td>
+</tr>
+<tr class="even">
+<td><strong>vaccine</strong></td>
+<td>Vaccinated (<code>Yes</code>/<code>No</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>complete_vaccine</strong></td>
+<td>Vaccination completeness (<code>None</code>, <code>Partial</code>,
+<code>Complete</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>immune_vaccine</strong></td>
+<td>Vaccine-induced immunity (<code>None</code>, <code>Partial</code>,
+<code>Total</code>).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
+<div id="citation" class="section level1">
+<h1>Citation</h1>
+<p>If you use these datasets in your research or teaching, please cite
+the original study:</p>
+<blockquote>
+<p>Pallarès N., Tebé C., Abelenda-Alonso G., Rombauts A., Oriol I.,
+Simonetti A. F., Rodríguez-Molinero A., Izquierdo E., Díaz-Brito V.,
+Molist G., Gómez Melis G., Carratalà J., Videla S., &amp; MetroSud and
+DIVINE study groups (2023). <em>Characteristics and Outcomes by Ceiling
+of Care of Subjects Hospitalized with COVID-19 During Four Waves of the
+Pandemic in a Metropolitan Area: A Multicenter Cohort Study.</em>
+Infectious Diseases and Therapy, 12(1), 273–289. DOI:
+10.1007/s40121-022-00705-w</p>
+</blockquote>
+<div class="small-note">
+Last updated: 2025-10-24
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
