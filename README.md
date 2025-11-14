@@ -2,7 +2,7 @@
 
 <br>
 
-DIVINE-datasets provides 14 curated and it is designed to support researchers in quickly accessing clean and structured data.
+DIVINE-datasets provides 14 curated datasets and it is designed to support researchers in quickly accessing clean and structured data.
 
 
 | Description | CSV |
@@ -30,4 +30,5 @@ Pallarès N., Tebé C., Abelenda-Alonso G., Rombauts A., Oriol I., Simonetti A. 
 ## Contact
 
 For questions, corrections or data-use requests: `npallares@igtp.cat`
+
 
